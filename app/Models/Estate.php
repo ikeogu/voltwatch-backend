@@ -1,12 +1,15 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Estate extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,HasUlids;
+    
     protected $fillable = ['owner_id','name','address','city','state','invite_code','max_tenants','is_active'];
     protected $casts = ['is_active' => 'boolean'];
 

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('daily_usage_summaries', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('meter_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('meter_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
 
             $table->date('summary_date');
             $table->decimal('kwh_consumed', 10, 4)->default(0);

@@ -1,9 +1,12 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class EstateMember extends Model
 {
+     use HasUlids;
     protected $fillable = ['estate_id','user_id','meter_id','flat_label','role','status','joined_at'];
     protected $casts = ['joined_at' => 'datetime'];
 

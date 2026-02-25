@@ -1,9 +1,13 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class AlertLog extends Model
 {
+     use HasUlids;
+
     protected $fillable = [
         'alert_id','user_id','meter_id','title','message',
         'trigger_value','severity','status','channels_used','read_at',

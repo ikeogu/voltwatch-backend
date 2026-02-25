@@ -14,7 +14,6 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends ApiController
 {
     /**
-     * POST /api/v1/auth/register
      * Registers a new user and auto-creates a free trial subscription.
      * @param Request $request
      * @return JsonResponse
@@ -25,7 +24,12 @@ class AuthController extends ApiController
         $data = $request->validate([
             'name'     => 'required|string|max:100',
             'email'    => 'required|email|unique:users,email',
-            'phone'    => 'required|string|unique:users,phone|regex:/^(\+234|0)[789][01]\d{8}$/',
+            'phone' => [
+                'required',
+                'string',
+                'unique:users,phone',
+                'regex:/^(\+234|0)[789][01]\d{8}$/'
+            ],
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -41,7 +45,7 @@ class AuthController extends ApiController
 
         $token = $user->createToken('voltwatch-mobile', ['*'])->plainTextToken;
 
-        return $this->successResponse('Account created successfully',[
+        return $this->successResponse('Account created successfully', [
             'token'   => $token,
             'user'    => new UserResource($user),
         ]);
@@ -61,8 +65,8 @@ class AuthController extends ApiController
 
         // Allow login by email OR phone
         $user = User::where('email', $data['login'])
-                    ->orWhere('phone', $data['login'])
-                    ->first();
+            ->orWhere('phone', $data['login'])
+            ->first();
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw ValidationException::withMessages([
@@ -148,5 +152,4 @@ class AuthController extends ApiController
             'user' => new UserResource($request->user()->fresh()),
         ]);
     }
-
 }

@@ -7,11 +7,13 @@ use App\Models\Meter;
 use App\Models\Recharge;
 use App\Modules\ElectroMeter\Services\AlertEvaluator;
 use App\Modules\ElectroMeter\Services\ConsumptionEstimator;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class RechargeController extends ApiController
 {
+    use AuthorizesRequests;
     /** GET /api/v1/meters/{meter}/recharges */
     public function index(Request $request, Meter $meter): JsonResponse
     {

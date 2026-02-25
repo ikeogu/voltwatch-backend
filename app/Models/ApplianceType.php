@@ -1,9 +1,13 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class ApplianceType extends Model
 {
+     use HasUlids;
+     
     protected $fillable = [
         'name','slug','category','icon_name',
         'avg_wattage','min_wattage','max_wattage',

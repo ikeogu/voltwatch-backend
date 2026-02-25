@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
 
             $table->enum('plan', ['free', 'basic', 'pro', 'estate'])->default('free');
             $table->enum('status', ['active', 'cancelled', 'expired', 'trial'])->default('trial');

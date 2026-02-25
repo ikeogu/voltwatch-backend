@@ -7,11 +7,13 @@ use App\Http\Controllers\ApiController;
 use App\Models\Alert;
 use App\Models\AlertLog;
 use App\Models\Meter;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class AlertController extends ApiController
 {
+    use AuthorizesRequests;
     /** GET /api/v1/meters/{meter}/alerts — alert rules */
     public function rules(Meter $meter): JsonResponse
     {

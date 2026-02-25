@@ -1,9 +1,12 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Recharge extends Model
 {
+     use HasUlids;
     protected $fillable = [
         'meter_id','user_id','units_added','amount_paid','rate_at_time',
         'units_before','units_after','token_number','source','notes','recharged_at',

@@ -1,9 +1,12 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Alert extends Model
 {
+    use HasUlids;
     protected $fillable = [
         'user_id','meter_id','type','threshold_value','threshold_days',
         'severity','notify_push','notify_sms','is_active','cooldown_minutes','last_fired_at',

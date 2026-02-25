@@ -1,9 +1,13 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Appliance extends Model
 {
+     use HasUlids;
+     
     protected $fillable = [
         'meter_id','user_id','appliance_type_id','nickname','quantity',
         'wattage','daily_hours','daily_kwh','daily_cost_ngn',

@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Carbon\CarbonPeriod;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AnalyticsController extends ApiController
 {
+    use AuthorizesRequests;
     /**
      * GET /api/v1/meters/{meter}/analytics
      * Query params: period=week|month|3months|year

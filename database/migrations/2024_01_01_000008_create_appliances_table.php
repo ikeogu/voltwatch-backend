@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('appliances', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('meter_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('appliance_type_id')->constrained();
+           $table->ulid('id')->primary();
+            $table->foreignUlid('meter_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('appliance_type_id')->constrained();
 
             $table->string('nickname')->nullable();        // 'Living Room AC', 'Kitchen Fridge'
             $table->integer('quantity')->default(1);       // How many of this appliance

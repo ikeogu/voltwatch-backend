@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('recharges', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('meter_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('meter_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
 
             $table->decimal('units_added', 10, 3);         // kWh credited
             $table->decimal('amount_paid', 10, 2);         // NGN paid

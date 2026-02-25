@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meters', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tariff_band_id')->constrained();
-            $table->foreignId('estate_id')->nullable()->constrained()->onDelete('set null');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('tariff_band_id')->constrained();
+            $table->foreignUlid('estate_id')->nullable()->constrained()->onDelete('set null');
 
             $table->string('meter_number')->unique();      // Physical meter number e.g. '0101234567890'
             $table->string('nickname')->nullable();        // 'Home Meter', 'Shop Meter'

@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('estates', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('owner_id')->constrained('users')->onDelete('cascade'); // landlord
+           $table->ulid('id')->primary();
+            $table->foreignUlid('owner_id')->constrained('users')->onDelete('cascade'); // landlord
             $table->string('name');                        // '14 Adeola Close'
             $table->string('address');
             $table->string('city')->default('Lagos');

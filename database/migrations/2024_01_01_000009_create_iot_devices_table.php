@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('iot_devices', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('meter_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('meter_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
 
             $table->string('device_id')->unique();          // Hardware serial e.g. 'VW-2024-ABC123'
             $table->string('nickname')->nullable();          // 'Main Meter Monitor'

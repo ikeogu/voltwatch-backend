@@ -1,9 +1,13 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class DailyUsageSummary extends Model
 {
+     use HasUlids;
+     
     protected $fillable = [
         'meter_id','user_id','summary_date','kwh_consumed','cost_ngn',
         'peak_wattage','avg_wattage','min_voltage','max_voltage',

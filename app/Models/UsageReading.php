@@ -1,9 +1,12 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class UsageReading extends Model
 {
+     use HasUlids;
     public $timestamps = false;
     protected $fillable = [
         'iot_device_id','meter_id','voltage','current','power_watts',

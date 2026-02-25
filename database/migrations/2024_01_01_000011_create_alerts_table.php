@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('alerts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('meter_id')->constrained()->onDelete('cascade');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('meter_id')->constrained()->onDelete('cascade');
 
             $table->enum('type', [
                 'low_units',            // "Alert me when units below X"

@@ -15,9 +15,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usage_readings', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('iot_device_id')->constrained()->onDelete('cascade');
-            $table->foreignId('meter_id')->constrained()->onDelete('cascade');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('iot_device_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('meter_id')->constrained()->onDelete('cascade');
 
             // Electrical readings from hardware sensor
             $table->decimal('voltage', 6, 2)->nullable();         // V

@@ -17,7 +17,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tariff_bands', function (Blueprint $table) {
-            $table->id();
+           $table->ulid('id')->primary();
             $table->string('code', 10)->unique();         // 'A', 'B', 'C', 'D', 'E'
             $table->string('name');                        // 'Band A', 'Band B', etc.
             $table->decimal('rate_per_kwh', 8, 2);        // NGN per kWh (e.g., 225.00)

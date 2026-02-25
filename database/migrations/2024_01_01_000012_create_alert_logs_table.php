@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('alert_logs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('alert_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('meter_id')->constrained()->onDelete('cascade');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('alert_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('meter_id')->constrained()->onDelete('cascade');
 
             $table->string('title');
             $table->text('message');

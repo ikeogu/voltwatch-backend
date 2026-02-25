@@ -1,9 +1,13 @@
 <?php
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
+     use HasUlids;
+
     protected $fillable = [
         'user_id','plan','status','amount_ngn',
         'paystack_subscription_code','paystack_customer_code',
@@ -45,7 +49,7 @@ class Subscription extends Model
         return $this->status === 'trial' && $this->trial_ends_at?->isFuture();
     }
 
-    public static function defaultFreeFor(int $userId): self
+    public static function defaultFreeFor(string  $userId): self
     {
         return self::create(array_merge(self::$plans['free'], [
             'user_id'        => $userId,

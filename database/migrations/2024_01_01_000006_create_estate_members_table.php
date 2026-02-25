@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('estate_members', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('estate_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('meter_id')->nullable()->constrained()->onDelete('set null');
+           $table->ulid('id')->primary();
+            $table->foreignUlid('estate_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('meter_id')->nullable()->constrained()->onDelete('set null');
 
             $table->string('flat_label')->nullable();      // 'Flat A', 'Unit 3', 'Shop 2'
             $table->enum('role', ['tenant', 'caretaker', 'owner'])->default('tenant');
