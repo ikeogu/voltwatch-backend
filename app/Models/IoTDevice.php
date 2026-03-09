@@ -9,6 +9,8 @@ class IoTDevice extends Model
 {
     use SoftDeletes, HasUlids;
 
+    protected $table = 'iot_devices';
+    
     protected $fillable = [
         'meter_id','user_id','device_id','nickname','firmware_version',
         'connection_type','status','last_voltage','last_current',

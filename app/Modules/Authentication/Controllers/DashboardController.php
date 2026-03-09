@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Modules\ElectroMeter\Services\ConsumptionEstimator;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends ApiController
@@ -20,9 +21,11 @@ class DashboardController extends ApiController
      */
     public function index(Request $request): JsonResponse
     {
-        $user  = $request->user();
+        /** @var User $user */
+        $user  = Auth::user();
         $meter = $user->primaryMeter?->load('tariffBand', 'appliances.applianceType', 'iotDevice');
 
+        
         if (!$meter) {
             return $this->errorWithData(
                 "Complete your meter setup to get started.",

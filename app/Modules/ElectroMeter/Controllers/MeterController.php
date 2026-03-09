@@ -8,6 +8,7 @@ use App\Models\TariffBand;
 use App\Modules\ElectroMeter\Services\ConsumptionEstimator;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class MeterController extends ApiController
 {
@@ -21,8 +22,12 @@ class MeterController extends ApiController
     /** POST /api/v1/meters */
     public function store(Request $request): JsonResponse
     {
+        /** @var User $user */
+        $user = Auth::user();
+
         $sub = $request->user()->subscription;
         $currentCount = $request->user()->meters()->where('is_active', true)->count();
+
 
         if ($currentCount >= ($sub?->max_meters ?? 1)) {
             return response()->json(['message' => 'Upgrade your plan to add more meters.'], 403);
@@ -109,7 +114,7 @@ class MeterController extends ApiController
             'days_remaining'   => $estimator->daysRemaining(),
             'daily_cost_ngn'   => $estimator->dailyCostNgn(),
             'tariff_band'      => ['code' => $meter->tariffBand?->code, 'rate' => $meter->tariffBand?->rate_per_kwh],
-            'is_critically_low'=> $meter->isCriticallyLow(),
+            'is_critically_low' => $meter->isCriticallyLow(),
         ];
     }
 }

@@ -112,23 +112,21 @@ class ApiController extends Controller
     public function successResponse($message, $data = null): JsonResponse
     {
         $status = 200;
-
-
-        if ((is_object($data) && property_exists($data, 'data')) || (is_array($data) && isset($data['data']))) {
+       /*  if ((is_object($data) && property_exists($data, 'data')) || (is_array($data) && isset($data['data']))) {
             $data = collect($data)->toArray();
             return response()->json([
                 'status' => true,
                 'message' => $message,
                 ...$data
             ], $status);
-        }
+        } */
 
 
 
         return response()->json([
             'status' => true,
             'message' => $message,
-            'data' => $data
+            ...$data
         ], $status);
     }
 
